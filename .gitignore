@@ -2,7 +2,7 @@
 node_modules/
 backend/node_modules/
 frontend/node_modules/
-package.json
+package-lock.json
 
 # Bootstrap y librerías (si las instalaste vía npm, ya están en node_modules)
 # Si tienes archivos de bootstrap sueltos podrías añadir:
