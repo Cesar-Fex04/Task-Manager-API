@@ -2,7 +2,7 @@
 
 Proyecto de la materia **Desarrollo Front-End** — Implementación de una Web API REST consumida desde un frontend estático.
 
-🌐 **Demo en vivo:** [https://TU-USUARIO.github.io/task-manager-api/frontend/](https://TU-USUARIO.github.io/task-manager-api/frontend/)
+🌐 **Demo:** [https://cesar-fex04.github.io/Task-Manager-API/]
 
 ---
 
@@ -23,27 +23,6 @@ Proyecto de la materia **Desarrollo Front-End** — Implementación de una Web A
 | Eliminar una tarea | `DELETE` | `/tasks/:id` |
 
 ---
-
-## 🗂 Estructura del repositorio
-
-```
-task-manager-api/
-│
-├── backend/
-│   ├── index.js          ← Servidor Express (API REST)
-│   ├── package.json
-│   └── package-lock.json
-│
-├── frontend/
-│   ├── index.html        ← Interfaz principal (HTML semántico)
-│   ├── css/
-│   │   └── styles.css    ← Estilos personalizados
-│   └── js/
-│       └── app.js        ← Lógica fetch (GET, POST, PATCH, DELETE)
-│
-├── .gitignore
-└── README.md
-```
 
 > ⚠️ **GitHub Pages** solo hostea el frontend estático.
 > El backend se ejecuta **localmente** con Node.js según la especificación `localhost:3000`.
@@ -91,9 +70,3 @@ o visita la demo en GitHub Pages (el link está arriba).
 | Datos | En memoria (arreglo JS) |
 
 ---
-
-## 👨‍💻 Autor
-
-**TU NOMBRE** — Materia: Desarrollo Front-End
-
-[![GitHub](https://img.shields.io/badge/GitHub-TU--USUARIO-FA5C5C?style=flat&logo=github)](https://github.com/TU-USUARIO)
