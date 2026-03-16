@@ -46,13 +46,6 @@ Se implementó la **Opción B** (Node.js + Express con JWT manual) en lugar de J
 
 Se eligió **localStorage** como estrategia de almacenamiento del token por las siguientes razones:
 
-| Criterio | localStorage | Cookie httpOnly |
-|---|---|---|
-| Facilidad de implementación | ✅ Simple | ⚠️ Requiere configuración del servidor |
-| Acceso desde JavaScript | ✅ Sí | ❌ No (intencional) |
-| Compatible con GitHub Pages | ✅ Sí | ❌ Requiere backend con dominio propio |
-| Riesgo XSS | ⚠️ Vulnerable | ✅ Protegida |
-
 Para este proyecto escolar donde el frontend está en GitHub Pages y el backend corre localmente, **localStorage es la opción viable**. En un sistema de producción real se usarían cookies httpOnly.
 
 ### ISIP03 — Vulnerabilidades identificadas y soluciones propuestas
