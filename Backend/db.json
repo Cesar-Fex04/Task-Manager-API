@@ -1,0 +1,40 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "email": "admin@test.com",
+      "password": "$2a$10$o0bNhKK2itRRnUZsm0iQg.SKy2Je3X9Te5W2fEwbWE3KV3/5A/OIm"
+    },
+    {
+      "id": 2,
+      "email": "nuevo@test.com",
+      "password": "$2a$10$0fbb16vgNshdv797uQVsJ.Puxpk/17K052TRY24QS2o9HVQ9HubD6"
+    }
+  ],
+  "tasks": [
+    {
+      "id": 1,
+      "title": "Apuntes de Ecuaciones Diferenciales",
+      "completed": false,
+      "userId": 1
+    },
+    {
+      "id": 2,
+      "title": "Crear maquina virtual",
+      "completed": true,
+      "userId": 1
+    },
+    {
+      "id": 3,
+      "title": "Aprender JWT",
+      "completed": false,
+      "userId": 2
+    },
+    {
+      "id": 4,
+      "title": "Obtener Token",
+      "completed": true,
+      "userId": 2
+    }
+  ]
+}
