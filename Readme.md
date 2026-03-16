@@ -128,3 +128,4 @@ Abre `FrontEnd/login.html` con Live Server en VS Code, o visita la demo en GitHu
 ## 👨‍💻 Autor
 
 **Julio César Lopez** — Materia: Desarrollo Front-End · Semestre 8
+
