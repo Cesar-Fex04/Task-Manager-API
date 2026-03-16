@@ -33,7 +33,7 @@ El frontend consume la API mediante `fetch` y actualiza la interfaz dinámicamen
 
 ---
 
-## 🎯 Objetivos académicos y decisiones técnicas
+## 🎯 Decisiones técnicas
 
 ### ISIP06 — Flujo completo de autenticación JWT
 Se implementó la **Opción B** (Node.js + Express con JWT manual) en lugar de JSON Server Auth, ya que esta última no es compatible con Node.js v22. Esto permitió entender el proceso interno de JWT con mayor profundidad:
@@ -44,7 +44,7 @@ Se implementó la **Opción B** (Node.js + Express con JWT manual) en lugar de J
 
 ### ISIP05 — Almacenamiento del token: localStorage vs cookies httpOnly
 
-Se eligió **localStorage** como estrategia de almacenamiento del token por las siguientes razones:
+Se eligió **localStorage** como estrategia de almacenamiento del token.
 
 Para este proyecto escolar donde el frontend está en GitHub Pages y el backend corre localmente, **localStorage es la opción viable**. En un sistema de producción real se usarían cookies httpOnly.
 
@@ -101,6 +101,7 @@ Se recomienda ver video tutorial para obtener token de prueba e  postman, depspu
 ### 3 — Abrir el frontend
 
 Abre `FrontEnd/login.html` con Live Server en VS Code, o visita la demo en GitHub Pages.
+si usted intenta abrir `FrontEnd/index.html` directamente, lo devolvera al login.
 
 ### 4 — Crear tu cuenta
 
