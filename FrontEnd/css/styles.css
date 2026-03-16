@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Fredoka+One&display=swap');
 
 :root {
@@ -31,7 +30,7 @@
 html { scroll-behavior: smooth; }
 
 body {
-  background: var(--bg); /* Esto mantiene tu color base cálido */
+  background: var(--bg);
   color: var(--text);
   font-family: 'Nunito', sans-serif;
   font-size: 15px;
@@ -39,10 +38,11 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  /* El background-image con los radial-gradient ha sido eliminado */
 }
 
-/* ── HEADER ── */
+/* ══════════════════════════════════════════════════════════════════
+   HEADER
+══════════════════════════════════════════════════════════════════ */
 header {
   background: var(--surface);
   border-bottom: 2px solid var(--border);
@@ -68,8 +68,8 @@ header h1 {
 }
 header h1 span { color: var(--red); }
 
+/* Badge "usuario logueado" */
 .api-badge {
-  margin-left: auto;
   display: flex; align-items: center; gap: .4rem;
   font-size: .72rem; font-weight: 700; color: var(--text-muted);
   background: var(--pale); border: 1.5px solid var(--border);
@@ -82,10 +82,31 @@ header h1 span { color: var(--red); }
 }
 @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
 
-/* ── MAIN ── */
+/* ── Botón cerrar sesión — mismo estilo que #add-btn ── */
+.btn-logout {
+  background: linear-gradient(135deg, var(--red), var(--orange));
+  border: none; border-radius: var(--radius);
+  color: #fff; cursor: pointer;
+  font-family: 'Fredoka One', cursive;
+  font-size: .9rem; letter-spacing: .03em;
+  padding: .5rem 1.2rem;
+  white-space: nowrap;
+  box-shadow: 0 4px 14px rgba(250,92,92,.35);
+  transition: transform var(--transition), box-shadow var(--transition), opacity var(--transition);
+  display: flex; align-items: center; gap: .35rem;
+}
+.btn-logout:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(250,92,92,.45);
+}
+.btn-logout:active { transform: translateY(0); }
+
+/* ══════════════════════════════════════════════════════════════════
+   MAIN
+══════════════════════════════════════════════════════════════════ */
 main { flex: 1; padding: 2.5rem 0; }
 
-/* ── ADD SECTION ── */
+/* ── Sección nueva tarea ── */
 #add-section {
   background: var(--surface);
   border: 2px solid var(--border);
@@ -134,7 +155,7 @@ main { flex: 1; padding: 2.5rem 0; }
 #add-btn:active { transform: translateY(0); }
 #add-btn:disabled { opacity: .55; cursor: not-allowed; transform: none; }
 
-/* ── TASKS SECTION ── */
+/* ── Sección lista de tareas ── */
 #tasks-section h2 {
   font-size: .75rem; font-weight: 800;
   letter-spacing: .1em; text-transform: uppercase;
@@ -147,10 +168,9 @@ main { flex: 1; padding: 2.5rem 0; }
   border-radius: 999px; padding: .1rem .55rem;
 }
 
-/* ── TASK LIST ── */
 #task-list { list-style: none; display: flex; flex-direction: column; gap: .75rem; }
 
-/* ── TASK ITEM ── */
+/* ── Task item ── */
 .task-item {
   background: var(--surface);
   border: 2px solid var(--border);
@@ -199,7 +219,7 @@ main { flex: 1; padding: 2.5rem 0; }
 .task-status.done { background: rgba(92,186,122,.12); color: #3d9960; border: 1.5px solid rgba(92,186,122,.3); }
 .task-status.pending { background: rgba(251,239,118,.4); color: #b08a00; border: 1.5px solid rgba(251,239,118,.8); }
 
-/* ── BOTONES DE ACCIÓN ── */
+/* ── Botones de acción por tarea ── */
 .task-actions { display: flex; gap: .4rem; flex-shrink: 0; flex-wrap: wrap; justify-content: flex-end; }
 
 .action-btn {
@@ -231,13 +251,13 @@ main { flex: 1; padding: 2.5rem 0; }
 .btn-delete { background: rgba(250,92,92,.08); border-color: rgba(250,92,92,.3); color: var(--red); }
 .btn-delete:hover { background: rgba(250,92,92,.18); border-color: var(--red); }
 
-/* ── EMPTY STATE ── */
+/* ── Empty state ── */
 #empty-state { text-align: center; padding: 4rem 1rem; color: var(--text-muted); }
 #empty-state .empty-icon { font-size: 3.5rem; margin-bottom: 1rem; }
 #empty-state p { font-family: 'Fredoka One', cursive; font-size: 1.15rem; color: var(--text); margin-bottom: .4rem; }
 #empty-state small { font-size: .85rem; font-weight: 500; }
 
-/* ── LOADING ── */
+/* ── Loading ── */
 #loading-state { text-align: center; padding: 3rem 1rem; color: var(--text-muted); font-size: .9rem; font-weight: 600; }
 .spinner {
   width: 32px; height: 32px;
@@ -247,28 +267,33 @@ main { flex: 1; padding: 2.5rem 0; }
 }
 @keyframes spin { to{transform:rotate(360deg)} }
 
-/* ── TOASTS ── */
+/* ── Notificaciones (evitamos el nombre .toast para no chocar con Bootstrap) ── */
 #toast-container {
   position: fixed; bottom: 1.5rem; right: 1.5rem;
   display: flex; flex-direction: column; gap: .6rem; z-index: 9999;
 }
-.toast {
-  background: var(--surface); border: 2px solid var(--border);
-  border-radius: var(--radius); color: var(--text);
-  font-family: 'Nunito', sans-serif;
-  font-size: .9rem; font-weight: 700;
-  padding: .8rem 1.2rem; min-width: 240px;
+.notif {
+  background: var(--surface) !important;
+  border: 2px solid var(--border) !important;
+  border-radius: var(--radius) !important;
+  color: var(--text) !important;
+  font-family: 'Nunito', sans-serif !important;
+  font-size: .9rem !important; font-weight: 700 !important;
+  padding: .8rem 1.2rem !important; min-width: 240px;
   box-shadow: 0 8px 30px rgba(253,138,107,.2);
   animation: toastIn .25s ease;
-  display: flex; align-items: center; gap: .65rem;
+  display: flex !important; opacity: 1 !important;
+  align-items: center; gap: .65rem;
 }
-.toast.success { border-left: 4px solid var(--success); }
-.toast.error   { border-left: 4px solid var(--red); }
-.toast.info    { border-left: 4px solid var(--orange); }
-.toast.warning { border-left: 4px solid var(--yellow); border-left-color: #c8a200; }
+.notif.success { border-left: 4px solid var(--success) !important; }
+.notif.error   { border-left: 4px solid var(--red) !important; }
+.notif.info    { border-left: 4px solid var(--orange) !important; }
+.notif.warning { border-left: 4px solid #c8a200 !important; }
 @keyframes toastIn { from{opacity:0;transform:translateX(20px)} to{opacity:1;transform:translateX(0)} }
 
-/* ── FOOTER ── */
+/* ══════════════════════════════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════════════════════════════ */
 footer {
   background: var(--surface); border-top: 2px solid var(--border);
   padding: 1.1rem 0; text-align: center;
@@ -277,28 +302,125 @@ footer {
 footer a { color: var(--red); text-decoration: none; font-weight: 700; }
 footer a:hover { text-decoration: underline; }
 
-/* ── RESPONSIVE ── */
+/* ══════════════════════════════════════════════════════════════════
+   LOGIN PAGE — login.html
+══════════════════════════════════════════════════════════════════ */
+.login-wrapper {
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  padding: 1rem;
+}
+
+.login-card {
+  background: var(--surface);
+  border: 2px solid var(--border);
+  border-radius: 18px;
+  padding: 2.5rem 2rem;
+  width: 100%; max-width: 420px;
+  box-shadow: 0 8px 32px rgba(253,138,107,0.15);
+}
+
+.login-logo {
+  width: 52px; height: 52px;
+  background: linear-gradient(135deg, var(--red), var(--orange));
+  border-radius: 14px;
+  display: grid; place-items: center;
+  font-size: 26px;
+  box-shadow: 0 4px 14px rgba(250,92,92,.35);
+  margin: 0 auto 1.2rem;
+}
+
+.login-title {
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.6rem; color: var(--text);
+  text-align: center; margin-bottom: .3rem;
+}
+.login-title span { color: var(--red); }
+
+.login-subtitle {
+  text-align: center; color: var(--text-muted);
+  font-size: .88rem; font-weight: 600; margin-bottom: 1.8rem;
+}
+
+/* Campos del formulario */
+.login-card .form-label {
+  font-weight: 700; color: var(--text); font-size: .85rem; margin-bottom: .3rem;
+}
+.login-card .form-control {
+  background: var(--pale); border: 2px solid var(--border);
+  border-radius: 10px;
+  font-family: 'Nunito', sans-serif; font-weight: 600;
+  padding: .65rem .9rem; color: var(--text);
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+.login-card .form-control:focus {
+  background: var(--cream); border-color: var(--orange);
+  box-shadow: 0 0 0 3px rgba(253,138,107,.2);
+  outline: none;
+}
+
+/* Botón login — idéntico a #add-btn */
+.btn-login {
+  width: 100%;
+  background: linear-gradient(135deg, var(--red), var(--orange));
+  border: none; border-radius: var(--radius);
+  color: #fff; cursor: pointer;
+  font-family: 'Fredoka One', cursive;
+  font-size: 1rem; letter-spacing: .03em;
+  padding: .75rem;
+  margin-top: .5rem;
+  box-shadow: 0 4px 14px rgba(250,92,92,.35);
+  transition: transform var(--transition), box-shadow var(--transition), opacity var(--transition);
+  display: flex; align-items: center; justify-content: center; gap: .4rem;
+}
+.btn-login:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(250,92,92,.45); }
+.btn-login:active { transform: translateY(0); }
+.btn-login:disabled { opacity: .55; cursor: not-allowed; transform: none; }
+
+/* Mensaje de éxito del registro */
+.login-success {
+  background: rgba(92,186,122,.1);
+  border: 1.5px solid rgba(92,186,122,.4);
+  border-radius: 10px; color: #2f8a50;
+  font-weight: 700; font-size: .85rem;
+  padding: .6rem .9rem; margin-top: 1rem;
+}
+
+/* Mensaje de error del login */
+.login-error {
+  background: rgba(250,92,92,.1);
+  border: 1.5px solid rgba(250,92,92,.4);
+  border-radius: 10px; color: #c03030;
+  font-weight: 700; font-size: .85rem;
+  padding: .6rem .9rem; margin-top: 1rem;
+  display: none;
+}
+
+/* Caja de credenciales de prueba */
+.demo-box {
+  background: var(--pale); border: 1.5px dashed var(--border);
+  border-radius: 10px; padding: .7rem .9rem; margin-top: 1.4rem;
+  font-size: .8rem; color: var(--text-muted); font-weight: 600;
+}
+.demo-box strong { color: var(--text); }
+
+/* ══════════════════════════════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════════════════════════════ */
 @media (max-width: 576px) {
   .input-row { flex-direction: column; }
   #add-btn   { width: 100%; justify-content: center; }
   .task-status { display: none; }
   .action-btn { font-size: .72rem; padding: .28rem .5rem; }
-  
- 
-  .task-item { 
-    flex-wrap: wrap; /* Permite que los elementos pasen a la siguiente línea */
-  }
+
+  .task-item { flex-wrap: wrap; }
   .task-actions {
-    width: 100%; /* Fuerza a los botones a tomar su propia línea abajo */
-    justify-content: flex-start; /* Alinea los botones a la izquierda */
-    margin-top: 0.5rem; /* Añade un poco de espacio con el título */
+    width: 100%;
+    justify-content: flex-start;
+    margin-top: 0.5rem;
   }
 
-  header .container {
-    flex-wrap: wrap; /* Evita que el logo, título y badge colapsen */
-  }
-  .api-badge {
-    margin-left: 0; /* Quita el margen automático para que se acomode mejor */
-    margin-top: 0.25rem;
-  }
+  header .container { flex-wrap: wrap; }
+  .api-badge { margin-left: 0; margin-top: .25rem; }
+  .btn-logout { font-size: .8rem; padding: .4rem .9rem; }
 }

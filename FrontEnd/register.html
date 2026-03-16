@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registro — Task Manager</title>
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+<div class="login-wrapper">
+  <div class="login-card">
+
+    <div class="login-logo">✏️</div>
+    <h1 class="login-title">Crear <span>cuenta</span></h1>
+    <p class="login-subtitle">Regístrate para empezar a gestionar tus tareas</p>
+
+    <div>
+      <div class="mb-3">
+        <label class="form-label" for="email">Correo electrónico</label>
+        <input type="email" id="email" class="form-control"
+          placeholder="tunombre@correo.com" autocomplete="email" />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label" for="password">Contraseña</label>
+        <input type="password" id="password" class="form-control"
+          placeholder="Mínimo 6 caracteres" autocomplete="new-password" />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label" for="password2">Confirmar contraseña</label>
+        <input type="password" id="password2" class="form-control"
+          placeholder="Repite tu contraseña" autocomplete="new-password" />
+      </div>
+
+      <button id="register-btn" class="btn-login">
+        ✅ Crear cuenta
+      </button>
+
+      <div id="error-msg"   class="login-error"></div>
+      <div id="success-msg" class="login-success" style="display:none"></div>
+    </div>
+
+    <div class="demo-box" style="text-align:center; margin-top:1.2rem;">
+      ¿Ya tienes cuenta?
+      <a href="login.html" style="color:var(--red); font-weight:700;">Inicia sesión</a>
+    </div>
+
+  </div>
+</div>
+
+<script>
+/**
+ * register.js (inline)
+ * ─────────────────────────────────────────────────────────────────
+ * Flujo:
+ *  1. El usuario llena email + contraseña
+ *  2. Se hace POST /register al backend
+ *  3. El backend hashea la contraseña con bcrypt y guarda en db.json
+ *  4. Si todo sale bien, redirigimos al login
+ * ─────────────────────────────────────────────────────────────────
+ */
+
+const API_URL     = "http://localhost:3000";
+const registerBtn = document.getElementById("register-btn");
+const emailInput  = document.getElementById("email");
+const passInput   = document.getElementById("password");
+const pass2Input  = document.getElementById("password2");
+const errorMsg    = document.getElementById("error-msg");
+const successMsg  = document.getElementById("success-msg");
+
+// Si ya tiene sesión activa, mandarlo directo a la app
+if (localStorage.getItem("token")) {
+  window.location.href = "index.html";
+}
+
+function mostrarError(msg) {
+  errorMsg.textContent  = "❌ " + msg;
+  errorMsg.style.display = "block";
+  successMsg.style.display = "none";
+}
+
+function mostrarExito(msg) {
+  successMsg.textContent  = "✅ " + msg;
+  successMsg.style.display = "block";
+  errorMsg.style.display   = "none";
+}
+
+async function registrar() {
+  const email    = emailInput.value.trim();
+  const password = passInput.value.trim();
+  const password2 = pass2Input.value.trim();
+
+  // Validaciones en el cliente antes de llamar al servidor
+  if (!email || !password || !password2) {
+    mostrarError("Todos los campos son requeridos."); return;
+  }
+  if (password.length < 6) {
+    mostrarError("La contraseña debe tener al menos 6 caracteres."); return;
+  }
+  if (password !== password2) {
+    mostrarError("Las contraseñas no coinciden."); return;
+  }
+
+  registerBtn.disabled = true;
+  registerBtn.textContent = "Creando cuenta...";
+
+  try {
+    /**
+     * POST /register
+     * El backend recibe email + password en texto plano,
+     * lo hashea con bcrypt y guarda el hash en db.json.
+     * Nosotros nunca vemos cómo queda el hash.
+     */
+    const res = await fetch(`${API_URL}/register`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password })
+    });
+
+    const datos = await res.json();
+
+    if (!res.ok) {
+      mostrarError(datos.error || "Error al registrar."); return;
+    }
+
+    mostrarExito("¡Cuenta creada! Redirigiendo al login...");
+
+    // Esperar 1.5 segundos y redirigir al login
+    setTimeout(() => { window.location.href = "login.html"; }, 1500);
+
+  } catch (err) {
+    mostrarError("No se pudo conectar con el servidor.");
+  } finally {
+    registerBtn.disabled = false;
+    registerBtn.textContent = "✅ Crear cuenta";
+  }
+}
+
+registerBtn.addEventListener("click", registrar);
+pass2Input.addEventListener("keydown", e => { if (e.key === "Enter") registrar(); });
+</script>
+
+</body>
+</html>

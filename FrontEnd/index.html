@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Task Manager API</title>
+
+  <!-- Bootstrap 5 — sin integrity para evitar errores de hash -->
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+
+  <!-- Estilos personalizados -->
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header>
+    <div class="container">
+      <div class="logo-icon">📋</div>
+      <h1>Task <span>Manager</span></h1>
+
+      <!-- Usuario autenticado + botón cerrar sesión -->
+      <div class="ms-auto d-flex align-items-center gap-3">
+        <span class="api-badge">
+          <div class="api-dot"></div>
+          <span id="user-email">usuario</span>
+        </span>
+        <button id="logout-btn" class="btn-logout" title="Cerrar sesión">
+          🚪 Cerrar sesión
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== MAIN ===== -->
+  <main>
+    <div class="container">
+
+      <!-- Nueva tarea -->
+      <section id="add-section" aria-labelledby="add-heading">
+        <h2 id="add-heading">Nueva tarea</h2>
+        <div class="input-row">
+          <input
+            type="text"
+            id="task-input"
+            placeholder="Ej. Revisar apuntes de clase…"
+            maxlength="120"
+            autocomplete="off"
+          />
+          <button id="add-btn">
+            <span>+</span> Agregar tarea
+          </button>
+        </div>
+      </section>
+
+      <!-- Lista de tareas -->
+      <section id="tasks-section" aria-labelledby="tasks-heading">
+        <h2 id="tasks-heading">
+          Tareas
+          <span id="task-count">0</span>
+        </h2>
+
+        <div id="loading-state" role="status">
+          <div class="spinner"></div>
+          Cargando tareas…
+        </div>
+
+        <ul id="task-list"></ul>
+
+        <div id="empty-state" hidden>
+          <div class="empty-icon">📭</div>
+          <p>No hay tareas todavía</p>
+          <small>Agrega tu primera tarea arriba</small>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="container">
+      <p>Task Manager API &mdash; Proyecto Front-End &bull;
+        <a href="https://github.com/Cesar-Fex04/Task-Manager-API" target="_blank" rel="noopener">GitHub</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Contenedor de notificaciones -->
+  <div id="toast-container"></div>
+
+  <!-- Bootstrap JS — sin integrity -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- App principal (NO script.js — es app.js) -->
+  <script src="js/app.js"></script>
+</body>
+</html>
